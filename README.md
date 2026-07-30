@@ -3,6 +3,7 @@
 
 A web app that scores how well a resume matches a job description and returns actionable feedback. Built with FastAPI + Streamlit, using spaCy and Sentence Transformers for NLP and the Groq API for LLM-generated suggestions.
 
+It is a AI-powered web application that evaluates how well a resume matches a given job description and provides actionable recommendations to improve ATS compatibility.
 ## What it does
 
 1. Upload a resume (PDF / DOC / DOCX) and paste a job description.
@@ -17,7 +18,7 @@ A web app that scores how well a resume matches a job description and returns ac
 - **NLP:** spaCy (`en_core_web_md`), Sentence Transformers (`all-MiniLM-L6-v2`)
 - **LLM:** Groq API (Llama 3)
 - **Auth + Database:** Supabase (email/password and Google OAuth)
-- **PDF report export:** WeasyPrint + Jinja2
+- **PDF report export:** xhtml2pdf + Jinja2
 
 ## Project structure
 
@@ -49,7 +50,7 @@ pip install -r requirements.txt
 python -m spacy download en_core_web_md
 ```
 
-WeasyPrint needs system libraries on Linux:
+xhtml2pdf:
 
 ```bash
 # Fedora
