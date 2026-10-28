@@ -6,7 +6,6 @@ import requests
 import streamlit as st
 BACKEND_URL = "http://localhost:8000"
 
-
 def _backend_url() -> str:
     """Get the configured FastAPI backend URL."""
     try:
@@ -14,12 +13,16 @@ def _backend_url() -> str:
     except (KeyError, FileNotFoundError):
         url = os.getenv("BACKEND_URL", "").strip()
 
+    # Local development only: use localhost when explicitly enabled.
+    if not url and os.getenv("ENVIRONMENT", "production") == "development":
+        url = "http://localhost:8000"
+
     url = str(url).strip().rstrip("/")
 
     if not url:
         raise RuntimeError(
-            "Backend URL is missing. Configure [backend].url "
-            "in Streamlit Secrets or set BACKEND_URL."
+            "Backend URL is missing. Add [backend].url to "
+            "Streamlit Cloud Secrets using your deployed backend URL."
         )
 
     if not url.startswith(("https://", "http://")):
